@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Seiko Mod Customizer</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 0 10px;
+  }
+  h1 {
+    text-align: center;
+  }
+  .customizer {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  label {
+    font-weight: bold;
+  }
+  select {
+    width: 100%;
+    padding: 6px;
+    font-size: 16px;
+  }
+  .preview {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    margin: 30px auto;
+    border: 1px solid #ccc;
+    background: #f8f8f8;
+  }
+  .preview img {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    pointer-events: none;
+  }
+  footer {
+    margin-top: 30px;
+    text-align: center;
+    font-size: 0.9em;
+    color: #777;
+  }
+</style>
+</head>
+<body>
+
+<h1>Seiko Mod Customizer</h1>
+
+<div class="customizer">
+  <div>
+    <label for="case-select">Case Style:</label>
+    <select id="case-select" aria-label="Case Style">
+      <option value="datejust">Datejust</option>
+      <option value="gmt">GMT</option>
+      <option value="prx">PRX</option>
+      <option value="royal-oak">Royal Oak</option>
+      <option value="nautilus">Nautilus</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="dial-select">Dial Style:</label>
+    <select id="dial-select" aria-label="Dial Style">
+      <option value="black">Black</option>
+      <option value="blue">Blue</option>
+      <option value="green">Green</option>
+      <option value="white">White</option>
+      <option value="silver">Silver</option>
+      <option value="gold">Gold</option>
+      <option value="champagne">Champagne</option>
+    </select>
+  </div>
+</div>
+
+<div class="preview" aria-live="polite" aria-label="Watch preview">
+  <img id="case-layer" alt="Watch Case" />
+  <img id="dial-layer" alt="Watch Dial" />
+</div>
+
+<footer>Images courtesy of example transparent PNGs on Imgur</footer>
+
+<script>
+  // Base URLs of images hosted on Imgur (replace these URLs with your own if you want)
+  const caseImages = {
+    datejust: 'https://i.imgur.com/YOUR_DATEJUST.png',
+    gmt: 'https://i.imgur.com/YOUR_GMT.png',
+    prx: 'https://i.imgur.com/YOUR_PRX.png',
+    'royal-oak': 'https://i.imgur.com/YOUR_ROYALOAK.png',
+    nautilus: 'https://i.imgur.com/YOUR_NAUTILUS.png',
+  };
+
+  const dialImages = {
+    black: 'https://i.imgur.com/YOUR_BLACK_DIAL.png',
+    blue: 'https://i.imgur.com/YOUR_BLUE_DIAL.png',
+    green: 'https://i.imgur.com/YOUR_GREEN_DIAL.png',
+    white: 'https://i.imgur.com/YOUR_WHITE_DIAL.png',
+    silver: 'https://i.imgur.com/YOUR_SILVER_DIAL.png',
+    gold: 'https://i.imgur.com/YOUR_GOLD_DIAL.png',
+    champagne: 'https://i.imgur.com/YOUR_CHAMPAGNE_DIAL.png',
+  };
+
+  const caseSelect = document.getElementById('case-select');
+  const dialSelect = document.getElementById('dial-select');
+  const caseLayer = document.getElementById('case-layer');
+  const dialLayer = document.getElementById('dial-layer');
+
+  // Set default images
+  function updatePreview() {
+    const caseVal = caseSelect.value;
+    const dialVal = dialSelect.value;
+
+    caseLayer.src = caseImages[caseVal] || '';
+    dialLayer.src = dialImages[dialVal] || '';
+  }
+
+  // Update preview on change
+  caseSelect.addEventListener('change', updatePreview);
+  dialSelect.addEventListener('change', updatePreview);
+
+  // Initialize preview on page load
+  updatePreview();
+</script>
+
+</body>
+</html>
